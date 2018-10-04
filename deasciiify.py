@@ -234,6 +234,7 @@ def deasciiify(text, elongate=0):
     >>> # elongate by 100 characters
     >>> print(deasciiify('The quick brown fox jumps over the lazy dog.',
     ...                  elongate=100))
+    ... # doctest: +NORMALIZE_WHITESPACE
     Ʈɦẻ ʠűȋḉƙḱᶄḵḳķʞǩƙḱᶄḵḳ ƀᶉŏẁἦ ƒḟḟᶂḟƒởᶍ×ẍẋᶍ ĵứȗửǔǚṷȕǜûủũṳṹữụṻưṃɱḿṁḿɱḿṁᶈşᵴșŝș
     ȫṽḙɽᵳɾŕŕŗȓṙɼᵳȑᵳɽȓȑᶉᵳᶉ ƭẖė ℓἂậẳẩầạẳἇầǡᶏạᶏƶžźƶȥᶎẑᵶżȥᶎẑᶎγƴẏӲӰýỳŷẏγẏỳ ᶑốǥ.
 
@@ -241,6 +242,7 @@ def deasciiify(text, elongate=0):
     >>> print(deasciiify(
     ...     'The <em>quick</em> <strong style="color:brown;">brown</strong> '
     ...     'fox %(verb)s over the &ldquo;lazy&rdquo; %s.'))
+    ... # doctest: +NORMALIZE_WHITESPACE
     Ṯȟè <em>ʠúᶖćḵ</em> <strong style="color:brown;">ḃᵲóẅἢ</strong> ḟọẍ %(verb)s
     ȏʋềŕ ṱȟḝ &ldquo;ḽӓżӮ&rdquo; %s.
 
