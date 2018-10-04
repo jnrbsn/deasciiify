@@ -1,0 +1,8 @@
+language: python
+python:
+  - 2.7
+install:
+  - pip install -e .[test]
+script:
+  - flake8 -v setup.py deasciiify.py
+  - python -m doctest -v deasciiify.py
