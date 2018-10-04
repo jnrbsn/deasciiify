@@ -173,7 +173,22 @@ def _elongate(text, n):
 
 
 _fragment_placeholder = u'\xff\x2a\x7e\x00'
-_fragment_pattern = re.compile(r'(<[^>]*>|%(?:\([^\)]+\))?s|&[^\s;]+;)')
+_fragment_pattern = re.compile(r"""
+(
+    # HTML tags
+    <[^>]*>
+    # HTML entities
+    | &[^\s;]+;
+    # % format
+    | %(?:\([^\)]+\))?s
+    # escaped { for format string
+    | \{\{
+    # escaped } for format string
+    | \}\}
+    # {} format specifier
+    | \{(?:[^\{\}]|\{[^\{\}]*\})*\}
+)
+""", re.VERBOSE)
 
 
 def _extract_fragments(text):
@@ -228,6 +243,13 @@ def deasciiify(text, elongate=0):
     ...     'fox %(verb)s over the &ldquo;lazy&rdquo; %s.'))
     Ṯȟè <em>ʠúᶖćḵ</em> <strong style="color:brown;">ḃᵲóẅἢ</strong> ḟọẍ %(verb)s
     ȏʋềŕ ṱȟḝ &ldquo;ḽӓżӮ&rdquo; %s.
+
+    >>> # preserve Python brace format params
+    >>> print(deasciiify(
+    ...     'The {} brown fox {verb} over the lazy dog. '
+    ...     'Escaped braces: {{escaped}}'))
+    Ŧḩẻ {} ḇᶉớωň ḟöᶍ {verb} ṓṽēȑ ŧĥể ĺåʐý ďòğ. Ḕʂċἂṗḕɗ ḅřἄćēṥ: {{ẻȿçẩṕḛƌ}}
+
     """
     text, fragments = _extract_fragments(text)
     text = _translate(_elongate(text, elongate))
